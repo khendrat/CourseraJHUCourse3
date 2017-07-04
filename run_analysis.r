@@ -4,11 +4,9 @@
 ## accelerometers of Samsung Galaxy S smartphones containing only the measurements on the mean and standard deviation
 ## for each measurement.
 
-## If argument dataSetType = "Activity", then the function will return a data set with the average of each variable for
-## each activity from the data collected by UCI from the accelerometers of Samsung Galaxy S smartphones.
-
-## If argument dataSetType = "Subject", then the function will return a data set with the average of each variable for
-## each subject from the data collected by UCI from the accelerometers of Samsung Galaxy S smartphones.
+## If argument dataSetType = "Average", then the function will return a data set with the average of each variable for
+## each activity and each subject from the data collected by UCI from the accelerometers of Samsung Galaxy S
+## smartphones.
 
 run_analysis <- function(dataSetType = "")
 {
@@ -52,13 +50,9 @@ run_analysis <- function(dataSetType = "")
   meltedDF <- melt(mergedDF, id = c("Activity", "Subject"), measure.vars = columnNames)
   # Return other data sets summarizing the average of each variable for each activity and each subject if dataSetType
   # argument is "Activity" or "Subject". Return the merged data set if not.
-  if (dataSetType == "Activity")
+  if (dataSetType == "Average")
   {
-    activityDF <- dcast(meltedDF, Activity ~ variable, mean)
-  }
-  else if (dataSetType == "Subject")
-  {
-    subjectDF <- dcast(meltedDF, Subject ~ variable, mean)
+    activityDF <- dcast(meltedDF, Activity + Subject ~ variable, mean)
   }
   else
   {
