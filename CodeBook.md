@@ -24,7 +24,7 @@ Merged training and test data containing only the measurements on the mean and s
 6. Translate the y data sets into descriptive activity names using the switch and sapply functions and values from 'activity_labels.txt'.
 7. Merge X and y data sets with activity and subject for each of the test and training data set using the cbind function.
 
-# Course 3 Activity.txt
+# Course 3 Average.txt
 
 ## Data Sources
 
@@ -32,28 +32,9 @@ Merged training and test data containing only the measurements on the mean and s
 
 ## Result (Tidy Data)
 
-Data set with the average of each variable for each activity from the data set in Course 3 Master.txt.
+Data set with the average of each variable for each activity and each subject from the data set in Course 3 Master.txt.
 
 ## Steps to Create Result
 
 1. Create a molten data frame (narrow form) from the data set in Course 3 Master.txt using the melt function.
-2. Summarize the average of each variable for each activity by applying the mean function within the dcast function.
-
-# Course 3 Subject.txt
-
-## Data Sources
-
-* Course 3 Master.txt
-
-## Result (Tidy Data)
-
-Data set with the average of each variable for each subject from the data set in Course 3 Master.txt.
-
-## Steps to Create Result
-
-1. Create a molten data frame (narrow form) from the data set in Course 3 Master.txt using the melt function.
-2. Summarize the average of each variable for each subject by applying the mean function within the dcast function.
-
-# R function to create all these.
-
-run_analysis.r
+2. Summarize the average of each variable for each activity and each subject by applying the mean function within the dcast function.
