@@ -53,3 +53,7 @@ Data set with the average of each variable for each subject from the data set in
 
 1. Create a molten data frame (narrow form) from the data set in Course 3 Master.txt using the melt function.
 2. Summarize the average of each variable for each subject by applying the mean function within the dcast function.
+
+# R function to create all these.
+
+run_analysis.r
