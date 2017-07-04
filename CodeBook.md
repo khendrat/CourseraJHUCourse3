@@ -18,7 +18,7 @@ Merged training and test data containing only the measurements on the mean and s
 
 1. Read data using read.table function into data frames.
 2. Find column names with "mean" and "std" in their names using grepl function.
-3. For the X data sets Extract only the measurements on the mean and standard deviation for each measurement (by selecting columns with "mean" and "std" in their names) using [] operator to subset the data frame.
+3. For the X data sets Extract only the measurements on the mean and standard deviation for each measurement (by selecting columns/variables with "mean" and "std" in their names) using [] operator to subset the data frame.
 4. For the X and subject data sets, label the data set with descriptive variable names using colnames function.
 5. Merge the test and training data sets using the rbind function.
 6. Translate the y data sets into descriptive activity names using the switch and sapply functions and values from 'activity_labels.txt'.
@@ -38,3 +38,7 @@ Data set with the average of each variable for each activity and each subject fr
 
 1. Create a molten data frame (narrow form) from the data set in Course 3 Master.txt using the melt function.
 2. Summarize the average of each variable for each activity and each subject by applying the mean function within the dcast function.
+
+# run_analysis.r
+
+run_analysis.r contains more details on the steps (actual parameters and function calls) to create the result data sets above.
