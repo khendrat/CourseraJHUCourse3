@@ -26,29 +26,32 @@ run_analysis <- function(dataSetType = "")
   # Find column names with "mean" and "std" in their names.
   featuresMean <- features[grepl("mean", features$V2), ]
   featuresStD <- features[grepl("std", features$V2), ]
-  columnNames <- c(as.vector(featuresMean$V2), as.vector(featuresStD$V2))
 
   # Extract only the measurements on the mean and standard deviation for each measurement (by selecting columns with
   # "mean" and "std" in their names).
   X_train <- X_train[, c(featuresMean$V1, featuresStD$V1)]
   X_test <- X_test[, c(featuresMean$V1, featuresStD$V1)]
-  colnames(X_train) <- columnNames
-  colnames(X_test) <- columnNames
 
   # Merge the test and training data sets.
   mergedDF <- rbind(X_train, X_test)
-  
-  # Translate the y data sets into descriptive activity names.
   y <- rbind(y_train, y_test)
-  Activity <- sapply(y$V1, switch, "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING")
   subject <- rbind(subject_train, subject_test)
+
+  # Label the data set with descriptive variable names
+  columnNames <- c(as.vector(featuresMean$V2), as.vector(featuresStD$V2))
+  colnames(mergedDF) <- columnNames
   colnames(subject) <- c("Subject")
   
-  # Merge X and y data sets for each of the test and training data set.
+  # Translate the y data sets into descriptive activity names.
+  Activity <- sapply(y$V1, switch, "WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING")
+  
+  # Merge X and y data sets with activity and subject for each of the test and training data set.
   mergedDF <- cbind(mergedDF, Activity, subject)
 
-  # Create other data sets summarizing the average of each variable for each activity and each subject.
+  # Create a molten data frame (narrow form) from the merged data set.
   meltedDF <- melt(mergedDF, id = c("Activity", "Subject"), measure.vars = columnNames)
+  # Return other data sets summarizing the average of each variable for each activity and each subject if dataSetType
+  # argument is "Activity" or "Subject". Return the merged data set if not.
   if (dataSetType == "Activity")
   {
     activityDF <- dcast(meltedDF, Activity ~ variable, mean)
